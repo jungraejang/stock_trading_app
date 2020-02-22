@@ -5,7 +5,7 @@ CREATE DATABASE stock_data;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  name VARCHAR UNIQUE NOT NULL,
+  name VARCHAR NOT NULL,
   email VARCHAR UNIQUE NOT NULL,
   password_digest VARCHAR NOT NULL
 );
