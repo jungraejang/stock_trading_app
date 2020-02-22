@@ -6,20 +6,21 @@ import TextField from "@material-ui/core/TextField";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import Checkbox from "@material-ui/core/Checkbox";
 // import Link from "@material-ui/core/Link";
-import { FormControl } from "@material-ui/core";
+import {FormControl} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh"
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://sevensreport.com/wp-content/uploads/2016/07/stock-market-3.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function View(props) {
   const classes = useStyles();
-  let { handleChange, errorMessage, registerUser } = props;
+  let {handleChange, errorMessage, registerUser} = props;
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -98,7 +99,7 @@ export default function View(props) {
                 onChange={handleChange}
               />
               {errorMessage ? (
-                <p style={{ color: "red" }}>
+                <p style={{color: "red"}}>
                   Email already in use. Please try with another email or recover
                   your password
                 </p>
