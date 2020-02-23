@@ -7,7 +7,6 @@ const getMostActive = (req, res, next) => {
       "https://sandbox.iexapis.com/stable/stock/market/list/mostactive?token=Tsk_8bc00ec876004f989543004461fe4e59"
     )
     .then(data => {
-      console.log("dataaaaaa", data.data);
       res.send(data.data);
     })
     .catch(err => {

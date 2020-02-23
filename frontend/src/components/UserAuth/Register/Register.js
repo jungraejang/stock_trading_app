@@ -5,7 +5,6 @@ import Auth from "../../../utils/Auth.js";
 // import {withRouter} from "react-router-dom";
 
 const Register = props => {
-  // Auth.isUserAuthenticated() ? props.history.push("/dashboard") : null;
   if (Auth.isUserAuthenticated()) {
     props.history.push("/");
   }
@@ -15,7 +14,8 @@ const Register = props => {
     {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      amount: 5000
     }
   );
 
@@ -27,9 +27,12 @@ const Register = props => {
 
   const registerUser = event => {
     event.preventDefault();
-    let { name, email, password } = userInput;
+    let { name, email, password, amount } = userInput;
     axios
-      .post("/users/new", { name, email, password })
+      .post("/users/new", { name, email, password, amount })
+      .then(user => {
+        axios.post("/portfolio/create", { email });
+      })
       .then(user => {
         axios.post("/users/login", { email, password });
       })

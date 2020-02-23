@@ -8,6 +8,9 @@ import Register from "./components/UserAuth/Register/Register.js";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import DashBoard from "./components/DashBoard/DashBoard.js";
+import NavBar from "./components/NavBar/NavBar.js";
+import Portfolio from "./components/Portfolio/Portfolio.js";
+import Transactions from "./components/Transactions/Transactions.js";
 
 class App extends Component {
   constructor(props) {
@@ -52,9 +55,10 @@ class App extends Component {
 
   render() {
     const { isLoggedIn } = this.state;
-    const { checkAuthenticateStatus } = this;
+    const { checkAuthenticateStatus, logoutUser } = this;
     return (
       <div className="App">
+        {isLoggedIn ? <NavBar logoutUser={logoutUser} /> : null}
         <Switch>
           <PublicRoute
             {...this.props}
@@ -63,7 +67,6 @@ class App extends Component {
             restricted={false}
             checkAuthenticateStatus={checkAuthenticateStatus}
           />
-
           <PublicRoute
             {...this.props}
             component={Register}
@@ -71,9 +74,10 @@ class App extends Component {
             restricted={false}
             checkAuthenticateStatus={checkAuthenticateStatus}
           />
+          <PrivateRoute component={Portfolio} path="/portfolio" />
+          <PrivateRoute component={Transactions} path="/transactions" />
           <PrivateRoute component={DashBoard} path="/" />
         </Switch>
-        {isLoggedIn ? <button onClick={this.logoutUser}>Logout</button> : null}
       </div>
     );
   }

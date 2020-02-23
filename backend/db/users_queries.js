@@ -1,4 +1,4 @@
-const { db } = require("./index.js");
+const {db} = require("./index.js");
 
 const authHelpers = require("../auth/helpers.js");
 
@@ -19,11 +19,12 @@ const getAllUsers = (req, res, next) => {
 const createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   db.none(
-    "INSERT INTO users (name, email, password_digest) VALUES (${name}, ${email}, ${password})",
+    "INSERT INTO users (name, email, password_digest, balance) VALUES (${name}, ${email}, ${password}, ${balance})",
     {
       name: req.body.name,
       email: req.body.email,
-      password: hash
+      password: hash,
+      balance: Number(req.body.amount)
     }
   )
     .then(() => {
@@ -39,25 +40,37 @@ const createUser = (req, res, next) => {
 };
 
 const logoutUser = (req, res, next) => {
-  console.log("logout triggered");
   req.logout();
   res.status(200).send("log out success");
 };
 
 const loginUser = (req, res) => {
-  console.log("login user", req.user);
   res.json(req.user);
 };
 
 const isLoggedIn = (req, res) => {
-  console.log("is loggedi n req user", req.user);
   if (req.user) {
-    console.log("isLoggedIn:", req.user);
-    res.json({ email: req.user });
+    res.json({email: req.user});
   } else {
-    console.log("isLoggedIn: null");
-    res.json({ email: null });
+    res.json({email: null});
   }
+};
+
+const getBalance = (req, res) => {
+  db.any("SELECT balance FROM users WHERE email = ${email}", {
+    email: req.body.email
+  })
+    .then(data => {
+      console.log("Dataaaa", data[0]);
+      res.status(200).json({
+        status: "success",
+        message: "Got all users!",
+        data: data[0]
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
 };
 
 module.exports = {
@@ -65,5 +78,6 @@ module.exports = {
   createUser,
   logoutUser,
   loginUser,
-  isLoggedIn
+  isLoggedIn,
+  getBalance
 };
