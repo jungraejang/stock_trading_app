@@ -45,7 +45,7 @@ const Register = props => {
         props.history.push("/");
       })
       .catch(err => {
-        console.log("errrrrrr: ", err.message);
+        console.log("error: ", err.message);
         handleError(true);
       });
   };

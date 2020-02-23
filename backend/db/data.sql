@@ -14,7 +14,7 @@ CREATE TABLE users (
 CREATE TABLE portfolio (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  data json,
+  data jsonb,
   total_value INT
 );
 

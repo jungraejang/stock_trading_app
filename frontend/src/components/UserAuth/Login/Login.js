@@ -1,8 +1,8 @@
-import React, {useReducer, useState} from "react";
+import React, { useReducer, useState } from "react";
 import View from "./View.js";
 import axios from "axios";
 import Auth from "../../../utils/Auth.js";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const Login = withRouter(props => {
   if (Auth.isUserAuthenticated()) {
@@ -10,7 +10,7 @@ const Login = withRouter(props => {
   }
   const [errorMessage, handleError] = useState(false);
   const [userInput, setUserInput] = useReducer(
-    (state, newState) => ({...state, ...newState}),
+    (state, newState) => ({ ...state, ...newState }),
     {
       email: "",
       password: ""
@@ -20,7 +20,7 @@ const Login = withRouter(props => {
   const handleChange = event => {
     const name = event.target.name;
     const newValue = event.target.value;
-    setUserInput({[name]: newValue});
+    setUserInput({ [name]: newValue });
   };
 
   const redirectRegisterPage = event => {
@@ -28,22 +28,22 @@ const Login = withRouter(props => {
   };
 
   const loginUser = event => {
-    let {email, password} = userInput;
+    let { email, password } = userInput;
     event.preventDefault();
     axios
-      .post("/users/login", {email, password})
+      .post("/users/login", { email, password })
       .then(() => {
         Auth.authenticateUser(email);
       })
       .then(() => {
         props.checkAuthenticateStatus();
-        setUserInput({email: "", password: ""});
+        setUserInput({ email: "", password: "" });
         handleError(false);
         props.history.push("/");
       })
       .catch(err => {
         handleError(true);
-        console.log("Errorrrr: ", err);
+        console.log("Error: ", err);
       });
   };
 

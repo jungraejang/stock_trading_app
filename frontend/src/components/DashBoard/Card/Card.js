@@ -36,12 +36,24 @@ export default function ImgMediaCard(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {companyName}
           </Typography>
-          <Typography variant="body2" color="textPrimary" component="p">
-            Price: ${openPrice}
-          </Typography>
-          <Typography variant="body2" color={priceColor(change)} component="p">
-            Change: ${change < 0 ? Math.abs(change) : change}
-          </Typography>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around"
+            }}
+          >
+            <Typography variant="body2" color="textPrimary" component="p">
+              Price: ${openPrice}
+            </Typography>
+            <Typography
+              variant="body2"
+              color={priceColor(change)}
+              component="p"
+            >
+              Change: ${change < 0 ? Math.abs(change) : change}
+            </Typography>
+          </div>
         </CardContent>
       </CardActionArea>
     </Card>

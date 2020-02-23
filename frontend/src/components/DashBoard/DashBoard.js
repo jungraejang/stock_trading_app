@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card/Card";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,13 +35,13 @@ const DashBoard = () => {
     };
     const fetchUserBalance = async () => {
       let email = localStorage.getItem("token");
-      let balance = await axios.post("/users/balance", {email});
+      let balance = await axios.post("/users/balance", { email });
       setBalance(balance.data.data.balance);
     };
     fetchMarketData();
     fetchUserBalance();
   }, []);
-  console.log("marketData", marketData);
+
   return (
     <Grid container component="main" className={classes.root}>
       <p>Welcome to your dash board</p>
@@ -50,13 +50,14 @@ const DashBoard = () => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         {marketData
-          ? marketData.data.map(el => {
+          ? marketData.data.map((el, key) => {
               return (
                 <Card
                   symbol={el.symbol}
                   companyName={el.companyName}
                   openPrice={el.open}
                   change={el.change}
+                  key={key}
                 />
               );
             })
