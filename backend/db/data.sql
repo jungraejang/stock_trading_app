@@ -21,7 +21,7 @@ CREATE TABLE portfolio (
 CREATE TABLE transactions (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  ticker VARCHAR UNIQUE NOT NULL,
+  ticker VARCHAR NOT NULL,
   price INT NOT NULL,
   amount INT NOT NULL,
   time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP

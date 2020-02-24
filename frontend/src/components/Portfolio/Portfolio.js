@@ -1,9 +1,10 @@
 import React from "react";
+import PurchaseTab from "./PurchaseTab/PurchaseTab";
 
 const Portfolio = () => {
   return (
     <div>
-      <p>Welcome to your portfolio</p>
+      <PurchaseTab />
     </div>
   );
 };

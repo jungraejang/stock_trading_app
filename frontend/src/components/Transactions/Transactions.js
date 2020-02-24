@@ -21,8 +21,8 @@ const Transactions = () => {
       {transactionsData
         ? transactionsData.map((el, key) => {
             return (
-              <div>
-                <p>{el.ticker}</p>
+              <div key={key}>
+                <p key={key}>{el.ticker}</p>
               </div>
             );
           })

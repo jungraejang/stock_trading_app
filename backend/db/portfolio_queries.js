@@ -19,20 +19,26 @@ const createPortfolio = (req, res, next) => {
     });
 };
 
-// const purchaseStock = (req, res, next) => {
-//   console.log("req bodyyy", req.body);
-//   let ticker = req.body.ticker;
-//   db.none(
-//     "UPDATE portfolio SET data=$1 WHERE user_id=(SELECT id FROM users WHERE email=$2)",
-//     [{[ticker]: {quantity: Number(req.body.quantity)}}, req.body.email]
-//   ).then(() => {
-//     res.status(200).json({
-//       message: "updated successful."
-//     });
-//   });
-// };
+const getPortfolio = (req, res, next) => {
+  db.any(
+    "SELECT ticker, sum(amount) FROM transactions WHERE user_id=(SELECT id FROM users WHERE email=${email}) GROUP BY ticker",
+    {email: req.body.email}
+  )
+    .then(data => {
+      res.status(200).json({
+        status: "success",
+        message: "transactions received successfully",
+        data: data
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+};
 
 module.exports = {
-  createPortfolio
-  // purchaseStock
+  createPortfolio,
+  getPortfolio
 };
