@@ -6,11 +6,12 @@ const {
   logoutUser,
   loginUser,
   isLoggedIn,
-  getBalance
+  getBalance,
+  updateUserBalance
 } = require("../db/users_queries.js");
 /* GET users listing. */
 const passport = require("../auth/local.js");
-const {loginRequired} = require("../auth/helpers.js");
+const { loginRequired } = require("../auth/helpers.js");
 
 router.get("/", getAllUsers);
 router.get("/balance", getBalance);
@@ -19,4 +20,6 @@ router.post("/login", passport.authenticate("local", {}), loginUser);
 router.get("/isLoggedIn", isLoggedIn);
 router.post("/logout", loginRequired, logoutUser);
 router.post("/balance", getBalance);
+router.post("/updateUserBalance", updateUserBalance);
+
 module.exports = router;

@@ -73,11 +73,31 @@ const getBalance = (req, res) => {
     });
 };
 
+const updateUserBalance = (req, res, next) => {
+  console.log("user balance", req.body.purchaseTotal, req.body.email);
+  db.any(
+    "UPDATE users SET balance = (balance - ${purchaseTotal}) WHERE email=${email}",
+    {purchaseTotal: Number(req.body.purchaseTotal), email: req.body.email}
+  )
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "balance updated successfully"
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+};
+
 module.exports = {
   getAllUsers,
   createUser,
   logoutUser,
   loginUser,
   isLoggedIn,
-  getBalance
+  getBalance,
+  updateUserBalance
 };

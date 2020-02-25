@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
+import StockInfo from "./StockInfo/StockInfo";
 
 const PurchaseTab = () => {
   const [ticker, setTicker] = useState("");
@@ -11,17 +12,20 @@ const PurchaseTab = () => {
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
   const [portfolio, setPortfolio] = useState(null);
+  const [systemMessage, setSystemMessage] = useState(null);
+  const [companyName, setCompanyName] = useState(null);
 
   useEffect(() => {
-    const fetchUserBalance = async () => {
-      let email = localStorage.getItem("token");
-      let balance = await axios.post("/users/balance", { email });
-      setBalance(balance.data.data.balance);
-    };
-
+    console.log("use effect triggered");
     fetchUserBalance();
     fetchPortfolio();
   }, []);
+
+  const fetchUserBalance = async () => {
+    let email = localStorage.getItem("token");
+    let balance = await axios.post("/users/balance", { email });
+    setBalance(balance.data.data.balance);
+  };
 
   const fetchPortfolio = async () => {
     let email = localStorage.getItem("token");
@@ -32,34 +36,51 @@ const PurchaseTab = () => {
   };
 
   const handleAmount = async event => {
+    setSystemMessage(null);
     setAmount(event.target.value);
   };
 
   const handleChange = async event => {
     // console.log(event.target.value);
     setTicker(event.target.value);
+    setSystemMessage(null);
+    setCompanyName(null);
     try {
       let priceData = await axios.get(
         `/market/currentPrice/${event.target.value}`
       );
       setPriceData(priceData.data.latestPrice);
+      setCompanyName(priceData.data.companyName);
     } catch {
       setPriceData(0);
+      setSystemMessage("No stock found under the ticker");
     }
   };
 
   const submitOrder = async () => {
     let email = localStorage.getItem("token");
-    try {
-      await axios.post("/transactions/purchase", {
-        amount,
-        email,
-        ticker,
-        price
-      });
-      fetchPortfolio();
-    } catch {
-      console.log("purchase failed");
+    let purchaseTotal = Number(amount) * Number(price);
+    if (purchaseTotal < balance) {
+      try {
+        await axios.post("/transactions/purchase", {
+          amount,
+          email,
+          ticker,
+          price
+        });
+        await axios.post("/users/updateUserBalance", {
+          email,
+          purchaseTotal
+        });
+        fetchPortfolio();
+        fetchUserBalance();
+      } catch {
+        console.log("purchase failed");
+      }
+    } else {
+      setSystemMessage(
+        "Insufficient Fund. Please lower your amount or add fund to your account"
+      );
     }
   };
 
@@ -71,9 +92,11 @@ const PurchaseTab = () => {
         style={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
       >
         <p>Balance: {balance}</p>
-
+        <p>{systemMessage ? systemMessage : null}</p>
         <TextField id="standard-basic" label="Ticker" onChange={handleChange} />
-        <p>Price: {price}</p>
+        <p>
+          Company Name: {companyName} Price: {price}
+        </p>
         <TextField
           id="standard-basic"
           label="Amount"
@@ -86,12 +109,7 @@ const PurchaseTab = () => {
         </button>
         {portfolio
           ? portfolio.map((el, key) => {
-              return (
-                <>
-                  <p key={key}>{el.ticker}</p>
-                  <p key={key + 1}>{el.sum}</p>
-                </>
-              );
+              return <StockInfo stockInfo={el} key={key} />;
             })
           : null}
       </Container>

@@ -55,7 +55,7 @@ const DashBoard = () => {
                 <Card
                   symbol={el.symbol}
                   companyName={el.companyName}
-                  openPrice={el.open}
+                  openPrice={el.latestPrice}
                   change={el.change}
                   key={key}
                 />

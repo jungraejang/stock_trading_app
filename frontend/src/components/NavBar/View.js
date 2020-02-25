@@ -9,13 +9,13 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+// import InboxIcon from "@material-ui/icons/MoveToInbox";
+// import MailIcon from "@material-ui/icons/Mail";
 import Drawer from "@material-ui/core/Drawer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import ReceiptIcon from "@material-ui/icons/Receipt";
+// import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+// import ReceiptIcon from "@material-ui/icons/Receipt";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({

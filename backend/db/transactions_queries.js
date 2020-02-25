@@ -1,4 +1,4 @@
-const { db } = require("./index.js");
+const {db} = require("./index.js");
 
 const purchaseStock = (req, res, next) => {
   console.log("req bodyyy", req.body);
@@ -21,7 +21,7 @@ const getAllTransactions = (req, res, next) => {
   console.log("req params", req.body.email);
   db.any(
     "SELECT * FROM transactions WHERE user_id=(SELECT id FROM users WHERE email=${email}) ORDER BY time_stamp DESC",
-    { email: req.body.email }
+    {email: req.body.email}
   )
     .then(data => {
       res.status(200).json({
