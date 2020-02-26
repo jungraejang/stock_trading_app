@@ -6,7 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import StockInfo from "./StockInfo/StockInfo";
 import Button from "@material-ui/core/Button";
-
+import Modal from "@material-ui/core/Modal";
+import StockChart from "./StockChart/StockChart.js";
 //TODO: Migrate and separate jsx to View.js
 
 const PurchaseTab = () => {
@@ -17,12 +18,26 @@ const PurchaseTab = () => {
   const [portfolio, setPortfolio] = useState(null);
   const [systemMessage, setSystemMessage] = useState(null);
   const [companyName, setCompanyName] = useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [modalTicker, setModalTicker] = React.useState(null);
 
   useEffect(() => {
     console.log("use effect triggered");
     fetchUserBalance();
     fetchPortfolio();
   }, []);
+
+  const handleOpen = ticker => {
+    console.log(" opentriggered", ticker);
+    setModalTicker(ticker);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    console.log("closed");
+    setModalTicker(null);
+    setOpen(false);
+  };
 
   const fetchUserBalance = async () => {
     let email = localStorage.getItem("token");
@@ -160,9 +175,50 @@ const PurchaseTab = () => {
         <div style={{ paddingBottom: "20px" }}>
           {portfolio
             ? portfolio.map((el, key) => {
-                return <StockInfo stockInfo={el} key={key} />;
+                return (
+                  <StockInfo
+                    stockInfo={el}
+                    key={key}
+                    handleOpen={handleOpen}
+                    handleClose={handleClose}
+                  />
+                );
               })
             : null}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={open}
+            onClose={handleClose}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center"
+              // backgroundImage: "linear-gradient(to right, #e91e63, #2196f3)"
+              // height: "50vh"
+            }}
+          >
+            <div
+              style={{
+                width: "90vw"
+                // height: "50vh"
+                // border: "2px solid #000"
+                // position: "relative"
+              }}
+            >
+              <StockChart modalTicker={modalTicker} />
+            </div>
+          </Modal>
         </div>
       </Container>
     </React.Fragment>

@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Modal from "@material-ui/core/Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles(theme => ({
   card: {
     marginTop: "40px",
     backgroundColor: "primary"
+  },
+  modal: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
   }
 }));
 

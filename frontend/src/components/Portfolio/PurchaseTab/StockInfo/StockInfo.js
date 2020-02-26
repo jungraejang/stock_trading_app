@@ -29,7 +29,8 @@ export default function StockInStockInfo(props) {
   const [previousClose, setPreviousClose] = useState(0);
   const [companyName, setCompanyName] = useState("");
 
-  let { ticker, sum } = props.stockInfo; // let {ticker, sum} = props.portfolio;
+  let { ticker, sum } = props.stockInfo;
+  let { handleOpen, handleClose } = props; // let {ticker, sum} = props.portfolio;
   const priceColor = (currentPrice, previousClose) => {
     if (currentPrice < previousClose) {
       return false;
@@ -53,7 +54,7 @@ export default function StockInStockInfo(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea key={ticker} onClick={() => handleOpen(ticker)}>
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
             {companyName}

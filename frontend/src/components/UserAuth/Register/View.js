@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh"
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function View(props) {
   const classes = useStyles();
-  let { handleChange, errorMessage, registerUser } = props;
+  let { handleChange, errorMessage, registerUser, redirectLoginPage } = props;
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -122,6 +122,17 @@ export default function View(props) {
               className={classes.submit}
             >
               Sign Up
+            </Button>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+              onClick={redirectLoginPage}
+            >
+              <ArrowBackIcon />
+              Go Back to Sign In
             </Button>
             <Box mt={5}></Box>
           </form>

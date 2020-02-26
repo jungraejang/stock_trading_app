@@ -29,7 +29,22 @@ const getCurrentPrice = (req, res, next) => {
     });
 };
 
+const getHistoricData = (req, res, next) => {
+  axios
+    .get(
+      `https://sandbox.iexapis.com/stable/stock/${req.params.ticker}/chart/1m?token=Tsk_8bc00ec876004f989543004461fe4e59`
+    )
+    .then(data => {
+      res.send(data.data);
+    })
+    .catch(err => {
+      console.log(err);
+      return next(err);
+    });
+};
+
 module.exports = {
   getMostActive,
-  getCurrentPrice
+  getCurrentPrice,
+  getHistoricData
 };

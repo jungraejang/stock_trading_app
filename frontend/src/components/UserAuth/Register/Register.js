@@ -25,6 +25,10 @@ const Register = props => {
     setUserInput({ [name]: newValue });
   };
 
+  const redirectLoginPage = event => {
+    props.history.push("/login");
+  };
+
   const registerUser = event => {
     event.preventDefault();
     let { name, email, password, amount } = userInput;
@@ -56,6 +60,7 @@ const Register = props => {
         handleChange={handleChange}
         registerUser={registerUser}
         errorMessage={errorMessage}
+        redirectLoginPage={redirectLoginPage}
       />
     </div>
   );
