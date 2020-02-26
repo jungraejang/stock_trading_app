@@ -1,7 +1,6 @@
 const {db} = require("./index.js");
 
 const purchaseStock = (req, res, next) => {
-  console.log("req bodyyy", req.body);
   db.none(
     "INSERT INTO transactions (user_id, ticker, price, amount) VALUES ((SELECT id from users WHERE email=${email}), ${ticker}, ${price}, ${amount})",
     {
@@ -18,7 +17,6 @@ const purchaseStock = (req, res, next) => {
 };
 
 const getAllTransactions = (req, res, next) => {
-  console.log("req params", req.body.email);
   db.any(
     "SELECT * FROM transactions WHERE user_id=(SELECT id FROM users WHERE email=${email}) ORDER BY time_stamp DESC",
     {email: req.body.email}

@@ -1,12 +1,10 @@
 import React from "react";
 import PurchaseTab from "./PurchaseTab/PurchaseTab";
 
+//TODO: migrate all functionality from PurchaseTab to Portfolio
+
 const Portfolio = () => {
-  return (
-    <div>
-      <PurchaseTab />
-    </div>
-  );
+  return <PurchaseTab />;
 };
 
 export default Portfolio;

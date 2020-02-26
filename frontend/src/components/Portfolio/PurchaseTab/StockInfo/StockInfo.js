@@ -8,7 +8,18 @@ import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345
+    width: "100%",
+    flex: "display",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    backgroundColor: "#f8bbd0",
+    marginTop: "10px"
+  },
+  greenFont: {
+    color: theme.palette.green[700]
+  },
+  redFont: {
+    color: theme.palette.red[700]
   }
 }));
 
@@ -16,14 +27,14 @@ export default function StockInStockInfo(props) {
   const classes = useStyles();
   const [currentPrice, setCurrentPrice] = useState(0);
   const [previousClose, setPreviousClose] = useState(0);
+  const [companyName, setCompanyName] = useState("");
 
   let { ticker, sum } = props.stockInfo; // let {ticker, sum} = props.portfolio;
-  console.log("propsssss", props, currentPrice);
   const priceColor = (currentPrice, previousClose) => {
     if (currentPrice < previousClose) {
-      return "secondary";
+      return false;
     }
-    return "primary";
+    return true;
   };
 
   useEffect(() => {
@@ -32,6 +43,7 @@ export default function StockInStockInfo(props) {
         let priceData = await axios.get(`/market/currentPrice/${ticker}`);
         setCurrentPrice(priceData.data.latestPrice);
         setPreviousClose(priceData.data.previousClose);
+        setCompanyName(priceData.data.companyName);
       } catch {
         setCurrentPrice(0);
       }
@@ -43,23 +55,33 @@ export default function StockInStockInfo(props) {
     <Card className={classes.root}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2"></Typography>
+          <Typography gutterBottom variant="h6" component="h2">
+            {companyName}
+          </Typography>
           <div
             style={{
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around"
+              flexDirection: "column",
+              justifyContent: "space-evenly"
             }}
           >
             <Typography variant="body2" color="textPrimary" component="p">
-              Ticker: {ticker}
+              Ticker: {ticker.toUpperCase()}
             </Typography>
             <Typography
               variant="body2"
               component="p"
-              color={priceColor(currentPrice, previousClose)}
+              className={
+                priceColor(currentPrice, previousClose)
+                  ? classes.greenFont
+                  : classes.redFont
+              }
             >
-              Amount: {sum} Total Assets: ${(sum * currentPrice).toFixed(2)}
+              {priceColor(currentPrice, previousClose) ? "⇑" : "⇓"} Assets: $
+              {(sum * currentPrice).toFixed(2)}
+            </Typography>
+            <Typography variant="body2" color="textPrimary" component="p">
+              Shares: {sum}
             </Typography>
           </div>
         </CardContent>

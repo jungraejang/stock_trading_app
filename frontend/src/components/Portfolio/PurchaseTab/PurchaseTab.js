@@ -5,6 +5,9 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import StockInfo from "./StockInfo/StockInfo";
+import Button from "@material-ui/core/Button";
+
+//TODO: Migrate and separate jsx to View.js
 
 const PurchaseTab = () => {
   const [ticker, setTicker] = useState("");
@@ -41,7 +44,7 @@ const PurchaseTab = () => {
   };
 
   const handleChange = async event => {
-    // console.log(event.target.value);
+    //Handles user input for ticker input and makes request to API for price info
     setTicker(event.target.value);
     setSystemMessage(null);
     setCompanyName(null);
@@ -74,6 +77,8 @@ const PurchaseTab = () => {
         });
         fetchPortfolio();
         fetchUserBalance();
+        setAmount(0);
+        setTicker("");
       } catch {
         console.log("purchase failed");
       }
@@ -88,30 +93,77 @@ const PurchaseTab = () => {
     <React.Fragment>
       <CssBaseline />
       <Container
+        style={{
+          backgroundImage: "linear-gradient(to right, #e91e63, #2196f3)",
+          paddingTop: "20px"
+        }}
         fixed
-        style={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
       >
-        <p>Balance: {balance}</p>
-        <p>{systemMessage ? systemMessage : null}</p>
-        <TextField id="standard-basic" label="Ticker" onChange={handleChange} />
-        <p>
-          Company Name: {companyName} Price: {price}
-        </p>
-        <TextField
-          id="standard-basic"
-          label="Amount"
-          type="number"
-          onChange={handleAmount}
-        />
-        <p>Total: {price * amount}</p>
-        <button type="button" onClick={submitOrder}>
-          Purchase
-        </button>
-        {portfolio
-          ? portfolio.map((el, key) => {
-              return <StockInfo stockInfo={el} key={key} />;
-            })
-          : null}
+        <div
+          style={{
+            backgroundColor: "#f48fb1",
+            borderRadius: "3px",
+            marginBottom: "10px"
+          }}
+        >
+          <Typography
+            variant="h5"
+            style={{
+              paddingTop: "20px"
+            }}
+            color="textPrimary"
+            component="p"
+          >
+            Balance: ${balance}
+          </Typography>
+          <Typography variant="body2" color="primary" component="p">
+            {systemMessage ? systemMessage : null}
+          </Typography>
+          <TextField
+            id="standard-basic"
+            label="Ticker"
+            onChange={handleChange}
+            value={ticker}
+          />
+          <Typography variant="h6" component="p">
+            {companyName}
+          </Typography>
+          <Typography variant="h6" component="p">
+            Price: {price}{" "}
+          </Typography>
+          <TextField
+            id="standard-basic"
+            label="Amount"
+            type="number"
+            onChange={handleAmount}
+            value={amount}
+          />
+          <Typography
+            variant="h5"
+            color="textPrimary"
+            component="p"
+            style={{ margin: "10px" }}
+          >
+            Total: {(price * amount).toFixed(2)}
+          </Typography>
+          <Button
+            fullWidth
+            type="button"
+            onClick={submitOrder}
+            variant="contained"
+            color="secondary"
+            style={{ marginBottom: "20px", width: "30vw" }}
+          >
+            Purchase
+          </Button>
+        </div>
+        <div style={{ paddingBottom: "20px" }}>
+          {portfolio
+            ? portfolio.map((el, key) => {
+                return <StockInfo stockInfo={el} key={key} />;
+              })
+            : null}
+        </div>
       </Container>
     </React.Fragment>
   );

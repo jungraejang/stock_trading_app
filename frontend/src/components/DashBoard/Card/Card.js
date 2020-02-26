@@ -4,22 +4,34 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import green from "@material-ui/core/colors/green";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345
+    width: "90vw",
+    marginTop: "5px",
+    marginBottom: "5px",
+    backgroundColor: "white"
+  },
+  greenFont: {
+    color: theme.palette.green[700],
+    backgroundColor: "white"
+  },
+  redFont: {
+    color: theme.palette.red[700],
+    backgroundColor: "white"
   }
 }));
 
-export default function ImgMediaCard(props) {
+const DashBoardCard = props => {
   const classes = useStyles();
   let { companyName, openPrice, change } = props;
 
   const priceColor = change => {
     if (change < 0) {
-      return "secondary";
+      return false;
     }
-    return "primary";
+    return true;
   };
 
   return (
@@ -41,14 +53,19 @@ export default function ImgMediaCard(props) {
             </Typography>
             <Typography
               variant="body2"
-              color={priceColor(change)}
               component="p"
+              className={
+                priceColor(change) ? classes.greenFont : classes.redFont
+              }
             >
-              Change: ${change < 0 ? Math.abs(change) : change}
+              {priceColor(change) ? "↑" : "↓"} Change: $
+              {change < 0 ? Math.abs(change) : change}
             </Typography>
           </div>
         </CardContent>
       </CardActionArea>
     </Card>
   );
-}
+};
+
+export default DashBoardCard;
