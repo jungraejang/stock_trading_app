@@ -26,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(
   session({
@@ -37,7 +38,9 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "../frontend/build/index.html"));
+});
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/market", marketRouter);

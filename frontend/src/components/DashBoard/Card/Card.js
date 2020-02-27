@@ -4,11 +4,10 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import green from "@material-ui/core/colors/green";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "90vw",
+    width: "70vw",
     marginTop: "5px",
     marginBottom: "5px",
     backgroundColor: "white"
@@ -38,7 +37,7 @@ const DashBoardCard = props => {
     <Card className={classes.root}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" style={{ color: "#0d47a1" }}>
             {companyName}
           </Typography>
           <div
@@ -49,7 +48,7 @@ const DashBoardCard = props => {
             }}
           >
             <Typography variant="body2" color="textPrimary" component="p">
-              Price: ${openPrice}
+              Price: ${openPrice ? Number(openPrice).toFixed(2) : null}
             </Typography>
             <Typography
               variant="body2"
@@ -59,7 +58,7 @@ const DashBoardCard = props => {
               }
             >
               {priceColor(change) ? "↑" : "↓"} Change: $
-              {change < 0 ? Math.abs(change) : change}
+              {change < 0 ? Math.abs(change).toFixed(2) : change.toFixed(2)}
             </Typography>
           </div>
         </CardContent>

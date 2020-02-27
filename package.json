@@ -1,0 +1,21 @@
+{
+  "name": "stock_trading_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/bin/www",
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install --only=prod && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jungraejang/stock_trading_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jungraejang/stock_trading_app/issues"
+  },
+  "homepage": "https://github.com/jungraejang/stock_trading_app#readme"
+}

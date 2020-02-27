@@ -1,7 +1,4 @@
-DROP DATABASE IF EXISTS stock_data;
-CREATE DATABASE stock_data;
 
-\c stock_data;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,

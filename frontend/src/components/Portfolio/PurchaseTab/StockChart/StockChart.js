@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+
 import axios from "axios";
 import { Line } from "react-chartjs-2";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    flex: "display",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    backgroundColor: "#f8bbd0",
-    marginTop: "10px"
-  },
-  greenFont: {
-    color: theme.palette.green[700]
-  },
-  redFont: {
-    color: theme.palette.red[700]
-  }
-}));
-
 export default function StockChart(props) {
-  const classes = useStyles();
   const [historicData, setHistoricData] = useState(null);
-
   let { modalTicker } = props;
 
   const generateDataObj = historicData => {
@@ -57,9 +34,9 @@ export default function StockChart(props) {
         }
       ]
     };
-    console.log("generate historicData", historicData.data);
     if (historicData) {
       for (let item of historicData.data) {
+        //Push fetched historic data into data object
         data.datasets[0].label = `${modalTicker.toUpperCase()} Monthly Price Chart`;
         data.labels.push(item.label);
         data.datasets[0].data.push(item.close);

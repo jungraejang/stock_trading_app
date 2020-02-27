@@ -8,6 +8,7 @@ import StockInfo from "./StockInfo/StockInfo";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import StockChart from "./StockChart/StockChart.js";
+
 //TODO: Migrate and separate jsx to View.js
 
 const PurchaseTab = () => {
@@ -15,26 +16,23 @@ const PurchaseTab = () => {
   const [price, setPriceData] = useState(0);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
-  const [portfolio, setPortfolio] = useState(null);
+  const [portfolio, setPortfolio] = useState([]);
   const [systemMessage, setSystemMessage] = useState(null);
   const [companyName, setCompanyName] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [modalTicker, setModalTicker] = React.useState(null);
 
   useEffect(() => {
-    console.log("use effect triggered");
     fetchUserBalance();
     fetchPortfolio();
   }, []);
 
   const handleOpen = ticker => {
-    console.log(" opentriggered", ticker);
     setModalTicker(ticker);
     setOpen(true);
   };
 
   const handleClose = () => {
-    console.log("closed");
     setModalTicker(null);
     setOpen(false);
   };
@@ -51,6 +49,9 @@ const PurchaseTab = () => {
       email
     });
     setPortfolio(portfolio.data.data);
+    // if (portfolio.length) {
+    //   setPortfolio(portfolio.data.data);
+    // }
   };
 
   const handleAmount = async event => {
@@ -61,7 +62,6 @@ const PurchaseTab = () => {
   const handleChange = async event => {
     //Handles user input for ticker input and makes request to API for price info
     setTicker(event.target.value);
-    setSystemMessage(null);
     setCompanyName(null);
     try {
       let priceData = await axios.get(
@@ -69,6 +69,7 @@ const PurchaseTab = () => {
       );
       setPriceData(priceData.data.latestPrice);
       setCompanyName(priceData.data.companyName);
+      setSystemMessage(null);
     } catch {
       setPriceData(0);
       setSystemMessage("No stock found under the ticker");
@@ -79,6 +80,7 @@ const PurchaseTab = () => {
     let email = localStorage.getItem("token");
     let purchaseTotal = Number(amount) * Number(price);
     if (purchaseTotal < balance) {
+      setPortfolio([]);
       try {
         await axios.post("/transactions/purchase", {
           amount,
@@ -90,10 +92,11 @@ const PurchaseTab = () => {
           email,
           purchaseTotal
         });
-        fetchPortfolio();
-        fetchUserBalance();
+        await fetchPortfolio();
+        await fetchUserBalance();
         setAmount(0);
         setTicker("");
+        setCompanyName(null);
       } catch {
         console.log("purchase failed");
       }
@@ -103,30 +106,36 @@ const PurchaseTab = () => {
       );
     }
   };
-
+  console.log("portfolio", portfolio);
   return (
     <React.Fragment>
       <CssBaseline />
       <Container
         style={{
-          backgroundImage: "linear-gradient(to right, #e91e63, #2196f3)",
-          paddingTop: "20px"
+          backgroundImage: "linear-gradient(to bottom, #e91e63, #0d47a1)",
+          paddingTop: "20px",
+          minHeight: "100vh",
+          minWidth: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
         }}
         fixed
       >
         <div
           style={{
-            backgroundColor: "#f48fb1",
+            backgroundColor: "white",
             borderRadius: "3px",
-            marginBottom: "10px"
+            marginBottom: "10px",
+            width: "90vw"
           }}
         >
           <Typography
             variant="h5"
             style={{
-              paddingTop: "20px"
+              paddingTop: "20px",
+              color: "#0d47a1"
             }}
-            color="textPrimary"
             component="p"
           >
             Balance: ${balance}
@@ -143,7 +152,13 @@ const PurchaseTab = () => {
           <Typography variant="h6" component="p">
             {companyName}
           </Typography>
-          <Typography variant="h6" component="p">
+          <Typography
+            variant="h6"
+            style={{
+              color: "#0d47a1"
+            }}
+            component="p"
+          >
             Price: {price}{" "}
           </Typography>
           <TextField
@@ -152,12 +167,12 @@ const PurchaseTab = () => {
             type="number"
             onChange={handleAmount}
             value={amount}
+            style={{ color: "white" }}
           />
           <Typography
             variant="h5"
-            color="textPrimary"
             component="p"
-            style={{ margin: "10px" }}
+            style={{ margin: "10px", color: "#0d47a1" }}
           >
             Total: {(price * amount).toFixed(2)}
           </Typography>
@@ -172,19 +187,28 @@ const PurchaseTab = () => {
             Purchase
           </Button>
         </div>
-        <div style={{ paddingBottom: "20px" }}>
-          {portfolio
-            ? portfolio.map((el, key) => {
-                return (
-                  <StockInfo
-                    stockInfo={el}
-                    key={key}
-                    handleOpen={handleOpen}
-                    handleClose={handleClose}
-                  />
-                );
-              })
-            : null}
+        <div style={{ paddingBottom: "20px", height: "auto" }}>
+          {portfolio.length ? (
+            portfolio.map((el, key) => {
+              return (
+                <StockInfo
+                  stockInfo={el}
+                  key={key}
+                  handleOpen={handleOpen}
+                  handleClose={handleClose}
+                />
+              );
+            })
+          ) : (
+            <Typography
+              variant="h5"
+              style={{
+                color: "white"
+              }}
+            >
+              Your Portfolio Is Currently Empty
+            </Typography>
+          )}
         </div>
         <div
           style={{
@@ -204,16 +228,11 @@ const PurchaseTab = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center"
-              // backgroundImage: "linear-gradient(to right, #e91e63, #2196f3)"
-              // height: "50vh"
             }}
           >
             <div
               style={{
                 width: "90vw"
-                // height: "50vh"
-                // border: "2px solid #000"
-                // position: "relative"
               }}
             >
               <StockChart modalTicker={modalTicker} />

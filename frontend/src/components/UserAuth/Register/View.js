@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: "#0d47a1"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -120,6 +120,9 @@ export default function View(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              style={{
+                backgroundImage: "linear-gradient(to right,#0d47a1, #e91e63)"
+              }}
             >
               Sign Up
             </Button>
@@ -127,9 +130,9 @@ export default function View(props) {
               type="button"
               fullWidth
               variant="contained"
-              color="secondary"
               className={classes.submit}
               onClick={redirectLoginPage}
+              style={{ backgroundColor: "#0d47a1", color: "white" }}
             >
               <ArrowBackIcon />
               Go Back to Sign In

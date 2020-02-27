@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import Auth from "./utils/Auth";
 import axios from "axios";
@@ -58,26 +58,28 @@ class App extends Component {
     const { checkAuthenticateStatus, logoutUser } = this;
     return (
       <div className="App">
-        {isLoggedIn ? <NavBar logoutUser={logoutUser} /> : null}
-        <Switch>
-          <PublicRoute
-            {...this.props}
-            component={Login}
-            path="/login"
-            restricted={false}
-            checkAuthenticateStatus={checkAuthenticateStatus}
-          />
-          <PublicRoute
-            {...this.props}
-            component={Register}
-            path="/register"
-            restricted={false}
-            checkAuthenticateStatus={checkAuthenticateStatus}
-          />
-          <PrivateRoute component={Portfolio} path="/portfolio" />
-          <PrivateRoute component={Transactions} path="/transactions" />
-          <PrivateRoute component={DashBoard} path="/" />
-        </Switch>
+        <div>{isLoggedIn ? <NavBar logoutUser={logoutUser} /> : null}</div>
+        <div>
+          <Switch>
+            <PublicRoute
+              {...this.props}
+              component={Login}
+              path="/login"
+              restricted={false}
+              checkAuthenticateStatus={checkAuthenticateStatus}
+            />
+            <PublicRoute
+              {...this.props}
+              component={Register}
+              path="/register"
+              restricted={false}
+              checkAuthenticateStatus={checkAuthenticateStatus}
+            />
+            <PrivateRoute component={Portfolio} path="/portfolio" />
+            <PrivateRoute component={Transactions} path="/transactions" />
+            <PrivateRoute component={DashBoard} path="/" />
+          </Switch>
+        </div>
       </div>
     );
   }

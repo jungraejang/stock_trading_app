@@ -8,7 +8,7 @@ import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
+    width: "90vw",
     flex: "display",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -30,25 +30,25 @@ export default function StockInStockInfo(props) {
   const [companyName, setCompanyName] = useState("");
 
   let { ticker, sum } = props.stockInfo;
-  let { handleOpen, handleClose } = props; // let {ticker, sum} = props.portfolio;
+  let { handleOpen } = props; // let {ticker, sum} = props.portfolio;
   const priceColor = (currentPrice, previousClose) => {
     if (currentPrice < previousClose) {
       return false;
     }
     return true;
   };
+  const getCurrentPrice = async ticker => {
+    try {
+      let priceData = await axios.get(`/market/currentPrice/${ticker}`);
+      setCurrentPrice(priceData.data.latestPrice);
+      setPreviousClose(priceData.data.previousClose);
+      setCompanyName(priceData.data.companyName);
+    } catch {
+      setCurrentPrice(0);
+    }
+  };
 
   useEffect(() => {
-    const getCurrentPrice = async ticker => {
-      try {
-        let priceData = await axios.get(`/market/currentPrice/${ticker}`);
-        setCurrentPrice(priceData.data.latestPrice);
-        setPreviousClose(priceData.data.previousClose);
-        setCompanyName(priceData.data.companyName);
-      } catch {
-        setCurrentPrice(0);
-      }
-    };
     getCurrentPrice(ticker);
   }, []);
 
@@ -56,7 +56,12 @@ export default function StockInStockInfo(props) {
     <Card className={classes.root}>
       <CardActionArea key={ticker} onClick={() => handleOpen(ticker)}>
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h2">
+          <Typography
+            gutterBottom
+            variant="h6"
+            style={{ color: "#0d47a1" }}
+            component="h2"
+          >
             {companyName}
           </Typography>
           <div

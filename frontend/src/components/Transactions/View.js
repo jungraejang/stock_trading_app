@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -25,8 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 const View = props => {
   const classes = useStyles();
-  let {transactionsData} = props;
-  console.log("transactionsData", transactionsData);
+  let { transactionsData } = props;
   return (
     <div
       style={{
@@ -36,7 +35,12 @@ const View = props => {
         justifyContent: "center"
       }}
     >
-      <Typography variant="h5" component="p">
+      <Typography
+        variant="h4"
+        component="p"
+        color="primary"
+        style={{ fontWeight: "bold" }}
+      >
         Transactions
       </Typography>
       {transactionsData

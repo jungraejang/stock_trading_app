@@ -14,9 +14,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Drawer from "@material-ui/core/Drawer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
-// import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-// import ReceiptIcon from "@material-ui/icons/Receipt";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import ReceiptIcon from "@material-ui/icons/Receipt";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo/bottomline-logo-small.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,8 +37,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "left",
-    alignItems: "left"
+    justifyContent: "space-between",
+    alignItems: "center"
   }
 }));
 
@@ -51,15 +52,18 @@ export default function View(props) {
   let listItems = [
     {
       to: "/",
-      primary: "Home"
+      primary: "Home",
+      icon: <HomeIcon />
     },
     {
       to: "/portfolio",
-      primary: "Portfolio"
+      primary: "Portfolio",
+      icon: <AccountBalanceIcon />
     },
     {
       to: "/transactions",
-      primary: "Transactions"
+      primary: "Transactions",
+      icon: <ReceiptIcon />
     }
   ];
 
@@ -74,9 +78,7 @@ export default function View(props) {
         {listItems.map((el, key) => {
           return (
             <ListItem button component={Link} to={el.to} key={key}>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
+              <ListItemIcon>{el.icon}</ListItemIcon>
               <ListItemText primary={el.primary} />
             </ListItem>
           );
@@ -110,6 +112,11 @@ export default function View(props) {
           {sideList("left")}
         </Drawer>
         <Toolbar></Toolbar>
+        <img
+          style={{ maxHeight: "40px", marginRight: "10px" }}
+          src={logo}
+          alt="logo"
+        />
       </AppBar>
     </div>
   );

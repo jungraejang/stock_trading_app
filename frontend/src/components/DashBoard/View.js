@@ -2,19 +2,18 @@ import React from "react";
 import Card from "./Card/Card";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Modal from "@material-ui/core/Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "auto",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundImage: "linear-gradient(to right, #e91e63, white)"
+    backgroundImage: "linear-gradient(to bottom,#0d47a1, #e91e63)",
+    paddingBottom: "10px"
     // backgroundColor: theme.palette.secondary[500]
     // backgroundColor: theme.palette.secondary[500]
   },
@@ -48,14 +47,19 @@ const View = props => {
         style={{
           backgroundColor: "#e91e63",
           width: "90vw",
-          borderRadius: "2px",
+          borderRadius: "5px",
           boxShadow: "1px 1px 1px #343536",
           paddingTop: "5px",
           marginTop: "5px",
           color: "white"
         }}
       >
-        <Typography gutterBottom variant="h4" component="h2">
+        <Typography
+          gutterBottom
+          variant="h4"
+          style={{color: "white", fontWeight: "bold"}}
+          component="h2"
+        >
           Welcome to Your Dashboard
         </Typography>
         <Typography gutterBottom variant="h6" component="h2">
@@ -65,7 +69,7 @@ const View = props => {
       <CssBaseline />
       <Typography
         gutterBottom
-        style={{marginTop: "10px"}}
+        style={{marginTop: "10px", color: "white", fontWeight: "bold"}}
         variant="h5"
         component="h2"
       >
