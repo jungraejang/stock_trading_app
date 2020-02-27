@@ -24,7 +24,7 @@ const Login = withRouter(props => {
   };
 
   const redirectRegisterPage = event => {
-    props.history.push("/api/register");
+    props.history.push("/register");
   };
 
   const loginUser = event => {
