@@ -8,7 +8,7 @@ const Transactions = () => {
   const fetchTransactions = async () => {
     let email = localStorage.getItem("token");
     let transactionsData = await axios.post(
-      "/transactions/getAllTransactions",
+      "/api/transactions/getAllTransactions",
       { email }
     );
     setTransactionsData(transactionsData.data.data);

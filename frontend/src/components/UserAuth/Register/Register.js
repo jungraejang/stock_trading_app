@@ -33,12 +33,12 @@ const Register = props => {
     event.preventDefault();
     let { name, email, password, amount } = userInput;
     axios
-      .post("/users/new", { name, email, password, amount })
+      .post("/api/users/new", { name, email, password, amount })
       .then(user => {
-        axios.post("/portfolio/create", { email });
+        axios.post("/api/portfolio/create", { email });
       })
       .then(user => {
-        axios.post("/users/login", { email, password });
+        axios.post("/api/users/login", { email, password });
       })
       .then(user => {
         Auth.authenticateUser(email);

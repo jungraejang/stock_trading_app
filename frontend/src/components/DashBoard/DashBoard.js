@@ -8,12 +8,12 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchMarketData = async () => {
-      let marketData = await axios.get("/market/mostactive");
+      let marketData = await axios.get("/api/market/mostactive");
       setMarketData(marketData);
     };
     const fetchUserBalance = async () => {
       let email = localStorage.getItem("token");
-      let balance = await axios.post("/users/balance", { email });
+      let balance = await axios.post("/api/users/balance", { email });
       setBalance(balance.data.data.balance);
     };
     fetchMarketData();

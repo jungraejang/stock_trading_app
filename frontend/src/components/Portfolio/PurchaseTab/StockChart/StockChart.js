@@ -49,7 +49,7 @@ export default function StockChart(props) {
     const getCurrentPrice = async modalTicker => {
       try {
         let historicData = await axios.get(
-          `/market/getHistoricData/${modalTicker}`
+          `/api/market/getHistoricData/${modalTicker}`
         );
         setHistoricData(historicData);
       } catch {}

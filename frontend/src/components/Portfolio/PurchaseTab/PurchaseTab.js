@@ -39,13 +39,13 @@ const PurchaseTab = () => {
 
   const fetchUserBalance = async () => {
     let email = localStorage.getItem("token");
-    let balance = await axios.post("/users/balance", { email });
+    let balance = await axios.post("/api/users/balance", { email });
     setBalance(balance.data.data.balance);
   };
 
   const fetchPortfolio = async () => {
     let email = localStorage.getItem("token");
-    let portfolio = await axios.post("/portfolio/getPortfolio", {
+    let portfolio = await axios.post("/api/portfolio/getPortfolio", {
       email
     });
     setPortfolio(portfolio.data.data);
@@ -65,7 +65,7 @@ const PurchaseTab = () => {
     setCompanyName(null);
     try {
       let priceData = await axios.get(
-        `/market/currentPrice/${event.target.value}`
+        `/api/market/currentPrice/${event.target.value}`
       );
       setPriceData(priceData.data.latestPrice);
       setCompanyName(priceData.data.companyName);
@@ -82,13 +82,13 @@ const PurchaseTab = () => {
     if (purchaseTotal < balance) {
       setPortfolio([]);
       try {
-        await axios.post("/transactions/purchase", {
+        await axios.post("/api/transactions/purchase", {
           amount,
           email,
           ticker,
           price
         });
-        await axios.post("/users/updateUserBalance", {
+        await axios.post("/api/users/updateUserBalance", {
           email,
           purchaseTotal
         });

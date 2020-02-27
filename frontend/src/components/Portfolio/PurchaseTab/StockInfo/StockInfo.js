@@ -39,7 +39,7 @@ export default function StockInStockInfo(props) {
   };
   const getCurrentPrice = async ticker => {
     try {
-      let priceData = await axios.get(`/market/currentPrice/${ticker}`);
+      let priceData = await axios.get(`/api/market/currentPrice/${ticker}`);
       setCurrentPrice(priceData.data.latestPrice);
       setPreviousClose(priceData.data.previousClose);
       setCompanyName(priceData.data.companyName);

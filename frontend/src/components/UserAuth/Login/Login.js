@@ -24,14 +24,14 @@ const Login = withRouter(props => {
   };
 
   const redirectRegisterPage = event => {
-    props.history.push("/register");
+    props.history.push("/api/register");
   };
 
   const loginUser = event => {
     let { email, password } = userInput;
     event.preventDefault();
     axios
-      .post("/users/login", { email, password })
+      .post("/api/users/login", { email, password })
       .then(() => {
         Auth.authenticateUser(email);
       })
