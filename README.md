@@ -1,5 +1,5 @@
 ## BottomLine
-A stock trading app built for NYC Tech Talent Pipeline
+A mobile-responsive stock trading app built for NYC Tech Talent Pipeline
 
 ##### About: 
 App Features: 
