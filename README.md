@@ -6,7 +6,7 @@ App Features:
 This app was built using React, Express, Material-ui, PostgreSQL and Chart.js. 
 
 ##### Demo: 
-[BottomLine on Heroku](https://bottomline-app.herokuapp.com/ "BottomLine on Heroku")
+Due to Heroku not being free anymore, app is no longer deployed. Please check below screenshots
 
 
 ##### App Features: 
