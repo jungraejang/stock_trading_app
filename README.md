@@ -19,9 +19,20 @@ This app was built using React, Express, Material-ui, PostgreSQL and Chart.js.
 6. User can see all transitions on Transitions page
 
 ##### Screenshots:
+##### Login Screen
 [![Login Screen](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png "Login Screen")](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png "Login Screen")
+
+##### Registration Screen
 [![Registration Screen](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")
+
+##### Dashboard Screen
 [![Dashboard](https://i.ibb.co/MfSN4X3/Screen-Shot-2020-02-27-at-1-19-19-AM.png "Dashboard")](https://i.ibb.co/MfSN4X3/Screen-Shot-2020-02-27-at-1-19-19-AM.png "Dashboard")
+
+##### Portfolio Screen
 [![Portfolio Page](https://i.ibb.co/nRYdtkK/Screen-Shot-2020-02-27-at-1-19-26-AM.png "Portfolio Page")](https://i.ibb.co/nRYdtkK/Screen-Shot-2020-02-27-at-1-19-26-AM.png "Portfolio Page")
+
+##### Price Chart
 [![Price Chart](https://i.ibb.co/S3TjJFm/Screen-Shot-2020-02-27-at-1-19-33-AM.png "Price Chart")](https://i.ibb.co/S3TjJFm/Screen-Shot-2020-02-27-at-1-19-33-AM.png "Price Chart")
+
+##### Transactions Screen
 [![Transactions Page](https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png "Transactions Page")](http://https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png "Transactions Page")
