@@ -24,15 +24,20 @@ Due to Heroku not being free anymore, app is no longer deployed. Please check be
 
 ##### Registration Screen
 [![Registration Screen](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")
+<img src="https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png" width="400">
 
 ##### Dashboard Screen
 [![Dashboard](https://i.ibb.co/MfSN4X3/Screen-Shot-2020-02-27-at-1-19-19-AM.png "Dashboard")](https://i.ibb.co/MfSN4X3/Screen-Shot-2020-02-27-at-1-19-19-AM.png "Dashboard")
+<img src="https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png" width="400">
 
 ##### Portfolio Screen
 [![Portfolio Page](https://i.ibb.co/nRYdtkK/Screen-Shot-2020-02-27-at-1-19-26-AM.png "Portfolio Page")](https://i.ibb.co/nRYdtkK/Screen-Shot-2020-02-27-at-1-19-26-AM.png "Portfolio Page")
+<img src="https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png" width="400">
 
 ##### Price Chart
 [![Price Chart](https://i.ibb.co/S3TjJFm/Screen-Shot-2020-02-27-at-1-19-33-AM.png "Price Chart")](https://i.ibb.co/S3TjJFm/Screen-Shot-2020-02-27-at-1-19-33-AM.png "Price Chart")
+<img src="https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png" width="400">
 
 ##### Transactions Screen
 [![Transactions Page](https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png "Transactions Page")](http://https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png "Transactions Page")
+<img src="https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png" width="400">
