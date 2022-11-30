@@ -20,7 +20,7 @@ Due to Heroku not being free anymore, app is no longer deployed. Please check be
 
 ##### Screenshots:
 ##### Login Screen
-[![Login Screen](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png "Login Screen")](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png | height=300 "Login Screen")
+[![Login Screen](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png "Login Screen")](https://i.ibb.co/L0V3LVh/Screen-Shot-2020-02-27-at-1-18-59-AM.png "Login Screen")
 
 ##### Registration Screen
 [![Registration Screen](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")](https://i.ibb.co/1ZHj82n/Screen-Shot-2020-02-27-at-1-19-07-AM.png "Registration Screen")
