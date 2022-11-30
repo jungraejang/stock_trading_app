@@ -35,4 +35,4 @@ Due to Heroku not being free anymore, app is no longer deployed. Please check be
 <img src="https://i.ibb.co/S3TjJFm/Screen-Shot-2020-02-27-at-1-19-33-AM.png" width="400">
 
 ##### Transactions Screen
-<img src="https://https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png" width="400">
+<img src="https://i.ibb.co/M93fgyf/Screen-Shot-2020-02-27-at-1-19-41-AM.png" width="400">
